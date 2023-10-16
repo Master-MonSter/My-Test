@@ -71,13 +71,13 @@
                 <a href="{% url 'website:about' %}">About</a>
               </li>
               <li class="menu-has-children">
-                <a href="{% static '' %}">Blog</a>
+                <a href="#">Blog</a>
                 <ul>
                   <li>
-                    <a href="{% static 'blog-home.html' %}">Blog Home</a>
+                    <a href="{% url 'blog:index' %}">Blog Home</a>
                   </li>
                   <li>
-                    <a href="{% static 'blog-single.html' %}">Blog Single</a>
+                    <a href="{% url 'blog:single' %}">Blog Single</a>
                   </li>
                 </ul>
               </li>

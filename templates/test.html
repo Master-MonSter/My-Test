@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +9,8 @@
 <body>
     <h1>Test page</h1>
     <h1>{{context}}</h1>
-    {% for post in context %}
-        <h2>{{post}}<h2>
-        <h4>{{post.published_date}}<h4>
-    {% endfor %}
+    <h2>{{context.id}}<h2>
+    <h4>{{context.published_date}}<h4>
+    <a href="{% url 'blog:test' context.id %}">Reload</a>
 </body>
 </html>

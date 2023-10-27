@@ -88,7 +88,7 @@
             <div class="row" {% if prevPost is None and nextPost is None %}hidden{% endif %}>
               <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center" {% if prevPost is None %}style="visibility: hidden;"{% endif %}>
                 <div class="thumb">
-                  <a href={% if prevPost is None %}""{% else %}"{% url 'blog:post' prevPost.id %}"{% endif %}><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt="" /></a>
+                  <a href={% if prevPost is None %}""{% else %}"{% url 'blog:post' prevPost.id %}"{% endif %}><img class="img-fluid" src="{{prevPost.image.url}}" alt="" width="60px" height="60px" /></a>
                 </div>
                 <div class="arrow">
                   <a href={% if prevPost is None %}""{% else %}"{% url 'blog:post' prevPost.id %}"{% endif %}><span class="lnr text-white lnr-arrow-left"></span></a>
@@ -107,7 +107,7 @@
                   <a href={% if nextPost is None %}""{% else %}"{% url 'blog:post' nextPost.id %}"{% endif %}><span class="lnr text-white lnr-arrow-right"></span></a>
                 </div>
                 <div class="thumb">
-                  <a href={% if nextPost is None %}""{% else %}"{% url 'blog:post' nextPost.id %}"{% endif %} aria-disabled="true"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt="" disabled /></a>
+                  <a href={% if nextPost is None %}""{% else %}"{% url 'blog:post' nextPost.id %}"{% endif %} aria-disabled="true"><img class="img-fluid" src="{{nextPost.image.url}}" alt="" width="60px" height="60px"/></a>
                 </div>
               </div>
             </div>

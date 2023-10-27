@@ -22,11 +22,16 @@ def index_view(request):
 
 def single_blog(request, pid):
     posts = check_published_date()
-    context = get_object_or_404(posts, pk=pid, status=1)
+    # print("all posts: " + str(posts))
+    context = get_object_or_404(posts, pk=pid)
     context.counted_views = context.counted_views + 1
     context.save()
-    print(context)
-    context = {'context': context}
+    # Finding the post before and after
+    nextPost = posts.filter(pk__gt=pid).first()
+    prevPost = posts.filter(pk__lt=pid).last()
+    # print("       prev" + str(prevPost)+ "       next" + str(nextPost) + "       context" + str(context))
+    # print(type(nextPost))
+    context = {'context': context, 'prevPost': prevPost, 'nextPost': nextPost}
     return render(request, 'blog/blog-single.html', context)
 
 def test_view(request, pid):

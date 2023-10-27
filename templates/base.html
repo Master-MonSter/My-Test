@@ -71,17 +71,9 @@
                 <a href="{% url 'website:about' %}">About</a>
               </li>
               <li class="menu-has-children">
-                <a href="#">Blog</a>
-                <ul>
-                  <li>
-                    <a href="{% url 'blog:index' %}">Blog Home</a>
-                  </li>
-                  <li>
-                    <a href="#">Blog Single</a>
-                  </li>
-                </ul>
+                <a href="{% url 'blog:index' %}">Blog</a>
               </li>
-              <li class="menu-has-children">
+              {% comment %} <li class="menu-has-children">
                 <a href="{% static '' %}">Pages</a>
                 <ul>
                   <li>
@@ -99,7 +91,7 @@
                     </ul>
                   </li>
                 </ul>
-              </li>
+              </li> {% endcomment %}
               <li>
                 <a href="{% url 'website:contact' %}">Contact</a>
               </li>

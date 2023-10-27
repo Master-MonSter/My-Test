@@ -1,13 +1,16 @@
 from django.contrib import admin
-from website.models import Contact
+from blog.models import Post, Category
 
-class ContactAdmin(admin.ModelAdmin):
-    date_hierarchy = 'created_date'
-    list_display = ('name', 'subject', 'email', 'created_date')
-    list_filter = ('email',)
-    # It's prefer to Meta class
-    # ordering = ('-created_date',) 
-    search_fields = ('name', 'email')
 
 # Register your models here.
-admin.site.register(Contact, ContactAdmin)
+class PostAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_date'
+    empty_value_display = '-empty-'
+    list_display = ('title', 'status', 'author', 'counted_views', 'counted_views', 'created_date', 'published_date')
+    list_filter = ('status', 'author')
+    # It's prefer to Meta class
+    # ordering = ('-created_date',) 
+    search_fields = ('title', 'content')
+
+admin.site.register(Category)
+admin.site.register(Post, PostAdmin)

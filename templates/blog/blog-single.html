@@ -7,9 +7,9 @@
     <div class="container">
       <div class="row d-flex align-items-center justify-content-center">
         <div class="about-content col-lg-12">
-          <h1 class="text-white">Blog Details Page</h1>
+          <h1 class="text-white">{{ context }}</h1>
           <p class="text-white link-nav">
-            <a href="{% url 'website:index' %}">Home</a> <span class="lnr lnr-arrow-right"></span><a href="{% url 'blog:index' %}">Blog</a> <span class="lnr lnr-arrow-right"></span> <a href="{% url 'blog:post' context.id %}">Blog Details Page</a>
+            <a href="{% url 'website:index' %}">Home</a> <span class="lnr lnr-arrow-right"></span><a href="{% url 'blog:index' %}">Blog</a> <span class="lnr lnr-arrow-right"></span>{{ context }}
           </p>
         </div>
       </div>
@@ -25,33 +25,24 @@
           <div class="single-post row">
             <div class="col-lg-12">
               <div class="feature-img">
-                <img class="img-fluid" src="{% static 'img/blog/feature-img1.jpg' %}" alt="" />
+                <img class="img-fluid" src="{{ context.image.url }}" alt="" />
               </div>
             </div>
             <div class="col-lg-3 col-md-3 meta-details">
               <ul class="tags">
                 <li>
-                  <a href="#">Food,</a>
-                </li>
-                <li>
-                  <a href="#">Technology,</a>
-                </li>
-                <li>
-                  <a href="#">Politics,</a>
-                </li>
-                <li>
-                  <a href="#">Lifestyle</a>
+                  <a href="#">{{ context.category.all|join:', ' }}</a>
                 </li>
               </ul>
               <div class="user-details row">
                 <p class="user-name col-lg-12 col-md-12 col-6">
-                  <a href="#">Mark wiens</a> <span class="lnr lnr-user"></span>
+                  <a href="#">{{ context.author.get_full_name }}</a> <span class="lnr lnr-user"></span>
                 </p>
                 <p class="date col-lg-12 col-md-12 col-6">
-                  <a href="#">{{context.published_date}}</a> <span class="lnr lnr-calendar-full"></span>
+                  <a href="#">{{ context.published_date }}</a> <span class="lnr lnr-calendar-full"></span>
                 </p>
                 <p class="view col-lg-12 col-md-12 col-6">
-                  <a href="#">{{context.counted_views}} Views</a> <span class="lnr lnr-eye"></span>
+                  <a href="#">{{ context.counted_views }} Views</a> <span class="lnr lnr-eye"></span>
                 </p>
                 <p class="comments col-lg-12 col-md-12 col-6">
                   <a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span>
@@ -73,12 +64,12 @@
               </div>
             </div>
             <div class="col-lg-9 col-md-9">
-              <h3 class="mt-20 mb-20">{{context.title}}</h3>
-              <p class="excert">{{context.content}}</p>
-              <p>{{context.content}}</p>
+              <h3 class="mt-20 mb-20">{{ context.title }}</h3>
+              <p class="excert">{{ context.content }}</p>
+              <p>{{ context.content }}</p>
             </div>
-            <div class="col-lg-12">
-              <div class="quotes">{{context.content}}</div>
+            {% comment %} <div class="col-lg-12">
+              <div class="quotes">{{ context.content }}</div>
               <div class="row mt-30 mb-30">
                 <div class="col-6">
                   <img class="img-fluid" src="{% static 'img/blog/post-img1.jpg' %}" alt="" />
@@ -91,32 +82,32 @@
                   <p>MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.</p>
                 </div>
               </div>
-            </div>
+            </div> {% endcomment %}
           </div>
           <div class="navigation-area">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+            <div class="row" {% if prevPost is None and nextPost is None %}hidden{% endif %}>
+              <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center" {% if prevPost is None %}style="visibility: hidden;"{% endif %}>
                 <div class="thumb">
-                  <a href="#"><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt="" /></a>
+                  <a href={% if prevPost is None %}""{% else %}"{% url 'blog:post' prevPost.id %}"{% endif %}><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt="" /></a>
                 </div>
                 <div class="arrow">
-                  <a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
+                  <a href={% if prevPost is None %}""{% else %}"{% url 'blog:post' prevPost.id %}"{% endif %}><span class="lnr text-white lnr-arrow-left"></span></a>
                 </div>
                 <div class="detials">
                   <p>Prev Post</p>
-                  <a href="#"><h4>Space The Final Frontier</h4></a>
+                  <a href={% if prevPost is None %}""{% else %}"{% url 'blog:post' prevPost.id %}"{% endif %}><h4>{{ prevPost }}</h4></a>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+              <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center" {% if nextPost is None %}style="visibility: hidden;"{% endif %}>
                 <div class="detials">
                   <p>Next Post</p>
-                  <a href="#"><h4>Telescopes 101</h4></a>
+                  <a href={% if nextPost is None %}""{% else %}"{% url 'blog:post' nextPost.id %}"{% endif %}><h4>{{ nextPost }}</h4></a>
                 </div>
                 <div class="arrow">
-                  <a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
+                  <a href={% if nextPost is None %}""{% else %}"{% url 'blog:post' nextPost.id %}"{% endif %}><span class="lnr text-white lnr-arrow-right"></span></a>
                 </div>
                 <div class="thumb">
-                  <a href="#"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt="" /></a>
+                  <a href={% if nextPost is None %}""{% else %}"{% url 'blog:post' nextPost.id %}"{% endif %} aria-disabled="true"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt="" disabled /></a>
                 </div>
               </div>
             </div>

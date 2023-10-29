@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from blog.models import Post
 from datetime import datetime
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # How to get the current timezone
 # from django.utils.timezone import get_current_timezone
@@ -16,8 +17,32 @@ def check_published_date():
     posts = Post.objects.filter(published_date__lte=now, status=1)
     return posts
 
-def index_view(request):
-    context = {'context': check_published_date()}
+def index_view(request, **kwargs):
+    posts = check_published_date()
+    # Category validation ***********************************************************************************
+    if kwargs is not None:
+        if kwargs.get('cat_name') is not None:
+            posts = posts.filter(category__name=kwargs['cat_name'])
+        elif kwargs.get('author_username') is not None:
+            posts = posts.filter(author__username=kwargs['author_username'])
+    # Category validation ***********************************************************************************
+    # Search validations *************************************************************************************
+    if request.method == 'GET':
+        if x:= request.GET.get('sBar'):
+            posts = posts.filter(content__contains=x)
+    # Search validations *************************************************************************************
+    # Pagination *********************************************************************************************
+    posts = Paginator(posts, 3)
+    try:
+        page_number = request.GET.get('page')
+        posts = posts.get_page(page_number)
+    except EmptyPage:
+        posts = posts.get_page(1)
+    except PageNotAnInteger:
+        posts = posts.get_page(1)
+    # Pagination *********************************************************************************************
+
+    context = {'context': posts}
     return render(request, 'blog/blog-home.html', context)
 
 def single_blog(request, pid):
@@ -41,3 +66,10 @@ def test_view(request, pid):
     context = {'context': context}
     return render(request, 'test.html', context)
 
+def blog_search(request):
+    posts = check_published_date()
+    if request.method == 'GET':
+        if x:= request.GET.get('sBar'):
+            posts = posts.filter(content__contains=x)
+    context = {'context': posts}
+    return render(request, 'blog/blog-home.html', context)

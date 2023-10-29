@@ -1,6 +1,7 @@
 {% load static %}
+{% load blog_tags %}
 <div class="single-sidebar-widget popular-post-widget">
-  <h4 class="popular-title">Popular Posts</h4>
+  <h4 class="popular-title">Latest Posts</h4>
   <div class="popular-post-list">
     {% for post in context %}
       <div class="single-post-list d-flex flex-row align-items-center">
@@ -8,8 +9,8 @@
           <img src="{{post.image.url}}" alt="" width="100" height="60"/>
         </div>
         <div class="details">
-          <a href="{% url 'blog:post' post.id %}"><h6>Space The Final Frontier</h6></a>
-          <p>02 Hours ago</p>
+          <a href="{% url 'blog:post' post.id %}"><h6>{{post}}</h6></a>
+          <p>{{post.published_date|date:"M d Y"}}</p>
         </div>
       </div>
     {% endfor %}

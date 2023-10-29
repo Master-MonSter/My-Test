@@ -39,7 +39,7 @@
               </ul>
               <div class="user-details row">
                 <p class="user-name col-lg-12 col-md-12 col-6">
-                  <a href="#">{{ context.author.get_full_name }}</a> <span class="lnr lnr-user"></span>
+                  <a href="{% url 'blog:author' context.author %}">{{ context.author.get_full_name }}</a> <span class="lnr lnr-user"></span>
                 </p>
                 <p class="date col-lg-12 col-md-12 col-6">
                   <a href="#">{{ context.published_date|date:"M d Y"}}</a> <span class="lnr lnr-calendar-full"></span>
@@ -229,9 +229,7 @@
 
             {% include "blog/blog-search.html" %}
             {% include "blog/blog-writer.html" %}
-
             {% latest_posts %}
-            
             {% include "blog/blog-ads.html" %}
             {% post_categories %}
             {% include "blog/blog-newsletter.html" %}

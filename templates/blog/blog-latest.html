@@ -6,7 +6,7 @@
     {% for post in context %}
       <div class="single-post-list d-flex flex-row align-items-center">
         <div class="thumb">
-          <img src="{{post.image.url}}" alt="" width="100" height="60"/>
+          <img src="{{post.image.url}}" alt=""  style="width:100px; height:60px"/>
         </div>
         <div class="details">
           <a href="{% url 'blog:post' post.id %}"><h6>{{post}}</h6></a>

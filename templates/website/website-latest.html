@@ -8,12 +8,11 @@
     <div class="details">
       <div class="tags">
         <ul>
-          <li>
-            <a href="#">Travel</a>
-          </li>
-          <li>
-            <a href="#">Life Style</a>
-          </li>
+          {% for cat in item.category.all %}
+            <li>
+              <a href="{% url 'blog:category' cat %}">{{cat}}</a>
+            </li>
+          {% endfor %}
         </ul>
       </div>
       <a href="{% url 'blog:post' item.id %}"><h4 class="title">{{item}}</h4></a>

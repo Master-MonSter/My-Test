@@ -1,5 +1,5 @@
 from django.contrib import admin
-from website.models import Contact
+from website.models import Contact, NewsLetter
 
 class ContactAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
@@ -11,3 +11,4 @@ class ContactAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Contact, ContactAdmin)
+admin.site.register(NewsLetter)

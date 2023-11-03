@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 
-    <style>
+    {% comment %} <style>
       @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
       /* ---------------Animation---------------- */
@@ -242,7 +242,7 @@
         text-align:right; 
       }
       /*#endregion Alert*/
-    </style>
+    </style> {% endcomment %}
 
   </head>
   <body>
@@ -438,11 +438,11 @@
     </footer>
     <!-- End footer Area -->
     {% comment %} AIzaSyBNa6Dkv_kYw0HZ0iLwqHa4UiA3mBXlAbM another key{% endcomment %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
     <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
     <script src="{% static 'js/jquery-ui.js' %}"></script>
     <script src="{% static 'js/easing.min.js' %}"></script>
@@ -500,6 +500,8 @@
         )
     });
   </script> {% endcomment %}
+
+  <!-- Main msg for all pages *********************************************************************************** -->
   {% if messages %}
     {% for message in messages %}
       {% if message.tags == 'alert-success' %}
@@ -517,5 +519,6 @@
       {% endif %}
     {% endfor %}
   {% endif %}
-    </html>
-    
+    <!-- Main msg for all pages *********************************************************************************** -->
+      </html>
+          

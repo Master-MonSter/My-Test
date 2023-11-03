@@ -10,7 +10,7 @@
 							<h1 class="text-white">
 								Contact Us				
 							</h1>	
-							<p class="text-white link-nav"><a href="{% static 'index.html' %}">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{% static 'contact.html' %}"> Contact Us</a></p>
+							<p class="text-white link-nav"><a href="{% url 'website:index' %}">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a> Contact Us</a></p>
 						</div>	
 					</div>
 				</div>
@@ -75,7 +75,7 @@
 							</form>	
 						</div>
 					</div><br>
-					{% comment %} Under send button******************************************** {% endcomment %}
+					{% comment %} Under send button********************************************It's a additional msg in page {% endcomment %}
 					{% for message in messages %}
 					<div class="container-fluid p-0">
 						<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
@@ -86,7 +86,7 @@
 						</div>
 					</div>
 					{% endfor %}
-					{% comment %} Under send button******************************************** {% endcomment %}
+					{% comment %} Under send button********************************************It's a additional msg in page {% endcomment %}
 				</div>	
 			</section>
 			<!-- End contact-page Area -->

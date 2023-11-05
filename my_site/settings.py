@@ -49,12 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.sites',
-
+    'django.contrib.sitemaps',
     'website.apps.WebsiteConfig',
     'blog',
 ]
 
-SITE_ID = 2
+SITE_ID = 2 # (2) --> is my site domain's id that saved on db/site
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

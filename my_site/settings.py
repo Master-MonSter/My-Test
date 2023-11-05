@@ -50,11 +50,17 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'robots',
     'website.apps.WebsiteConfig',
     'blog',
 ]
 
+# Sites framework configuration
 SITE_ID = 2 # (2) --> is my site domain's id that saved on db/site
+
+# Robots configuration
+ROBOTS_USE_HOST = True  # (True) --> is my robot should be show HOST name
+ROBOTS_USE_SITEMAP = True # (True) --> is my robot should be show SITEMAP name
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

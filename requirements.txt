@@ -3,3 +3,4 @@ asgiref
 sqlparse
 tzdata
 pillow
+django-robots

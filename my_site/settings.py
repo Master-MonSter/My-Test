@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'robots',
+    'taggit',
     'debug_toolbar',
     'website.apps.WebsiteConfig',
     'blog',
@@ -160,3 +161,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# Taggit module
+TAGGIT_CASE_INSENSITIVE = False

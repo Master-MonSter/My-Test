@@ -25,6 +25,8 @@ def index_view(request, **kwargs):
             posts = posts.filter(category__name=kwargs['cat_name'])
         elif kwargs.get('author_username') is not None:
             posts = posts.filter(author__username=kwargs['author_username'])
+        elif kwargs.get('tag_name') is not None:
+            posts = posts.filter(tag__name=kwargs['tag_name'])
     # Category validation ***********************************************************************************
     # Search validations *************************************************************************************
     if request.method == 'GET':

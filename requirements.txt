@@ -5,3 +5,4 @@ tzdata
 pillow
 django-robots
 django-taggit
+django-summernote

@@ -68,8 +68,8 @@
             </div>
             <div class="col-lg-9 col-md-9">
               <h3 class="mt-20 mb-20">{{ context.title }}</h3>
-              <p class="excert">{{ context.content }}</p>
-              <p>{{ context.content }}</p>
+              <p class="excert">{{ context.content|safe }}</p>
+              {% comment %} <p>{{ context.content|safe }}</p> {% endcomment %}
             </div>
             {% comment %} <div class="col-lg-12">
               <div class="quotes">{{ context.content }}</div>

@@ -111,7 +111,8 @@
                   <img class="img-fluid" src="{{post.image.url}}" alt="" />
                 </div>
                 <a class="posts-title" href="{% url 'blog:post' post.id %}"><h3>{{post.title}}</h3></a>
-                <p class="excert">{{post.content|truncatewords:40}}</p>
+                <!--******* truncatewords ALONE doesn't work with safe *******-->
+                <p class="excert">{{post.content|safe|truncatewords_html:20}}</p>
                 <a href="{% url 'blog:post' post.id %}" class="primary-btn">View More</a>
               </div>
             </div>

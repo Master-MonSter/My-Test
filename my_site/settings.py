@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django_summernote',
     'robots',
     'taggit',
     'debug_toolbar',
@@ -164,3 +165,6 @@ INTERNAL_IPS = [
 
 # Taggit module
 TAGGIT_CASE_INSENSITIVE = False
+
+# Summernote (how to allow iframe)
+X_FRAME_OPTIONS = 'SAMEORIGIN'

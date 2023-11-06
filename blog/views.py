@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post
+from blog.models import Post, Comment
 from datetime import datetime
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -51,6 +51,7 @@ def single_blog(request, pid):
     posts = check_published_date()
     # print("all posts: " + str(posts))
     context = get_object_or_404(posts, pk=pid)
+    comments = Comment.objects.filter(post=context.id, approved = True)
     context.counted_views = context.counted_views + 1
     context.save()
     # Finding the post before and after
@@ -58,7 +59,7 @@ def single_blog(request, pid):
     prevPost = posts.filter(pk__lt=pid).last()
     # print("       prev" + str(prevPost)+ "       next" + str(nextPost) + "       context" + str(context))
     # print(type(nextPost))
-    context = {'context': context, 'prevPost': prevPost, 'nextPost': nextPost}
+    context = {'context': context, 'prevPost': prevPost, 'nextPost': nextPost, 'comments': comments}
     return render(request, 'blog/blog-single.html', context)
 
 def test_view(request, pid):

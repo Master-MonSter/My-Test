@@ -7,3 +7,4 @@ django-robots
 django-taggit
 django-summernote
 django-simple-captcha
+django-multi-captcha-admin

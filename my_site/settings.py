@@ -41,6 +41,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -169,3 +170,8 @@ TAGGIT_CASE_INSENSITIVE = False
 
 # Summernote (how to allow iframe)
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# Multi captcha admin configuration (3type: simple-captcha, recaptcha, recaptcha2)
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}

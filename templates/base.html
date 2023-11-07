@@ -507,13 +507,13 @@
       {% if message.tags == 'alert-success' %}
         <script>
           Swal.fire(
-            'Its Done',
+            '{{message}}',
             )
         </script>
       {% elif message.tags == 'alert-error' %}
         <script>
           Swal.fire(
-            'An Erorr occurred',
+            '{{message}}',
             )
         </script>
       {% endif %}

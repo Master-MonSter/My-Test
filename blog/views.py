@@ -64,8 +64,8 @@ def single_blog(request, pid):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            form.save()
             messages.add_message(request, messages.SUCCESS, 'Your comment submitted successfully')
+            form.save()
         else:
             messages.add_message(request, messages.ERROR, 'Your comment didnt submite')
     form = CommentForm()

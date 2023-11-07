@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post, Comment
+from blog.forms import CommentForm
+from django.contrib import messages
 from datetime import datetime
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -57,9 +59,21 @@ def single_blog(request, pid):
     # Finding the post before and after
     nextPost = posts.filter(pk__gt=pid).first()
     prevPost = posts.filter(pk__lt=pid).last()
+
+    # ******************************** About CommentForm ********************************
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Your comment submitted successfully')
+        else:
+            messages.add_message(request, messages.ERROR, 'Your comment didnt submite')
+    form = CommentForm()
+    # ******************************** About CommentForm ********************************
+
     # print("       prev" + str(prevPost)+ "       next" + str(nextPost) + "       context" + str(context))
     # print(type(nextPost))
-    context = {'context': context, 'prevPost': prevPost, 'nextPost': nextPost, 'comments': comments}
+    context = {'context': context, 'prevPost': prevPost, 'nextPost': nextPost, 'comments': comments, 'form': form}
     return render(request, 'blog/blog-single.html', context)
 
 def test_view(request, pid):
@@ -76,3 +90,16 @@ def blog_search(request):
             posts = posts.filter(content__contains=x)
     context = {'context': posts}
     return render(request, 'blog/blog-home.html', context)
+
+def comment_view(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Well done')
+            # return HttpResponseRedirect('/contact')
+        else:
+            messages.add_message(request, messages.ERROR, 'Error!')
+            # return HttpResponseRedirect('/contact')
+    form = CommentForm()
+    return render(request, 'website/blog-single.html', {'form': form})

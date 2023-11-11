@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from website.forms import ContactForm, NewsLetterForm
 from django.contrib import messages
+from django.utils.safestring import mark_safe
 # def check_published_date():
     # now = datetime.now()
 
@@ -31,10 +32,10 @@ def contact_view(request):
             obj.name = "unknown"
             # Update values before save ****************************************************************
             form.save()
-            messages.add_message(request, messages.SUCCESS, 'Well done')
+            messages.add_message(request, messages.SUCCESS, '******************<br>Well done<br>******************')
             # return HttpResponseRedirect('/contact')
         else:
-            messages.add_message(request, messages.ERROR, 'Error!')
+            messages.add_message(request, messages.ERROR, 'Somthing went wrong<br>please try again')
             # return HttpResponseRedirect('/contact')
     form = ContactForm()
     return render(request, 'website/contact.html', {'form': form})
@@ -44,10 +45,10 @@ def newsletter_view(request):
         form = NewsLetterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, 'Well done')
+            messages.add_message(request, messages.SUCCESS, '******************<br>Well done<br>******************')
             return HttpResponseRedirect('/')
         else:
-            messages.add_message(request, messages.ERROR, 'Error!')
+            messages.add_message(request, messages.ERROR, 'Somthing went wrong<br>please try again')
     return HttpResponseRedirect('/')
 
 def json_test(request):

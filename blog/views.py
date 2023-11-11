@@ -96,10 +96,10 @@ def comment_view(request):
         form = CommentForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, 'Well done')
+            messages.add_message(request, messages.SUCCESS, '******************<br>Well done<br>******************')
             # return HttpResponseRedirect('/contact')
         else:
-            messages.add_message(request, messages.ERROR, 'Error!')
+            messages.add_message(request, messages.ERROR, 'Somthing went wrong<br>please try again')
             # return HttpResponseRedirect('/contact')
     form = CommentForm()
     return render(request, 'website/blog-single.html', {'form': form})

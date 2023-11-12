@@ -257,6 +257,9 @@
                   <li>
                     <span style="font-weight:450; color: white;">Hi {{request.user.username}}</span>
                   </li>
+                  <li>
+                    <a href="{% url 'accounts:logout' %}">Log out</a>
+                  </li>
                 {% else %}
                   <li>
                     <a href="{% url 'accounts:login' %}">Login</a>

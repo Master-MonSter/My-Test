@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def login_view(request):
@@ -21,6 +22,11 @@ def login_view(request):
         return render(request, 'accounts/login.html')
     else:
         return redirect('/')
-    
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('/')
+
 def register_view(request):
     return render(request, 'accounts/signup.html')

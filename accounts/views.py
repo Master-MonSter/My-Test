@@ -4,12 +4,22 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 def login_view(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
+            # ********************************************************* Checking that login is done with email or username and handle it *********************************************************
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            author = User.objects.filter(email=username).first()
+            if author is not None:
+                request.POST._mutable = True
+                request.POST['username'] = author
+            print(request.POST)
             form = AuthenticationForm(request=request, data=request.POST)
+            # ********************************************************* Checking that login is done with email or username and handle it *********************************************************
             if form.is_valid():
                 username = form.cleaned_data['username']
                 password = form.cleaned_data['password']

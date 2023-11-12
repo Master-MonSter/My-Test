@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -29,4 +29,18 @@ def logout_view(request):
     return redirect('/')
 
 def register_view(request):
-    return render(request, 'accounts/signup.html')
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                # Update values before save ****************************************************************
+                obj = form.save(commit=False)
+                obj.email = request.POST.get('email')
+                # Update values before save ****************************************************************
+                messages.add_message(request, messages.SUCCESS, 'Your register is done successfully')
+                form.save()
+                return redirect('/accounts/login/')
+            messages.add_message(request, messages.ERROR, 'Your register is failed')
+        return render(request, 'accounts/signup.html')
+    else:
+        return redirect('/')

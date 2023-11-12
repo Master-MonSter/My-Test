@@ -17,7 +17,12 @@ def login_view(request):
                 if user is not None:
                     login(request, user)
                     messages.add_message(request, messages.SUCCESS, 'You have been logged in successfully')
-                    return redirect('/')
+                    # ************************************* Redirect to before post after login else go to home page *************************************
+                    if 'next' in request.POST:
+                        return redirect(request.POST.get('next'))
+                    else:
+                        return redirect('/')
+                    # ************************************* Redirect to before post after login else go to home page *************************************
             messages.add_message(request, messages.ERROR, 'Your informations is NOT valid')
         return render(request, 'accounts/login.html')
     else:

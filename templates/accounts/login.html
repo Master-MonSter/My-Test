@@ -28,6 +28,9 @@
 		      	<h3 class="mb-4 text-center">Have an account?</h3>
 		      	<form action="{% url 'accounts:login' %}" class="signin-form" method="post">
 					{% csrf_token %}
+					{% if request.GET.next %}
+						<input type="hidden" name="next" value="{{request.GET.next}}">
+					{% endif %}
 		      		<div class="form-group">
 		      			<input type="text" name="username" class="form-control" placeholder="Username" required>
 		      		</div>
@@ -89,7 +92,7 @@
 				<script>
 					Swal.fire({
 						icon: "success",
-						title: "Well",
+						title: "Well...",
 						html: "{{message|safe}}",
 						footer: '<a href="/">Home</a>'
 					});
@@ -99,6 +102,15 @@
 					Swal.fire({
 						icon: "error",
 						title: "Oops...",
+						html: '{{message|safe}}',
+						footer: '<a href="/">Home</a>'
+					});
+				</script>
+			{% elif message.tags == 'alert-info' %}
+				<script>
+					Swal.fire({
+						icon: "info",
+						title: "Attention...",
 						html: '{{message|safe}}',
 						footer: '<a href="/">Home</a>'
 					});

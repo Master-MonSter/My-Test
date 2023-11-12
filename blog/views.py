@@ -1,10 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Comment
 from blog.forms import CommentForm
 from django.contrib import messages
 from datetime import datetime
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 # How to get the current timezone
 # from django.utils.timezone import get_current_timezone
@@ -50,16 +53,6 @@ def index_view(request, **kwargs):
     return render(request, 'blog/blog-home.html', context)
 
 def single_blog(request, pid):
-    posts = check_published_date()
-    # print("all posts: " + str(posts))
-    context = get_object_or_404(posts, pk=pid)
-    comments = Comment.objects.filter(post=context.id, approved = True)
-    context.counted_views = context.counted_views + 1
-    context.save()
-    # Finding the post before and after
-    nextPost = posts.filter(pk__gt=pid).first()
-    prevPost = posts.filter(pk__lt=pid).last()
-
     # ******************************** About CommentForm ********************************
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -71,8 +64,20 @@ def single_blog(request, pid):
     form = CommentForm()
     # ******************************** About CommentForm ********************************
 
-    # print("       prev" + str(prevPost)+ "       next" + str(nextPost) + "       context" + str(context))
-    # print(type(nextPost))
+    posts = check_published_date()
+    # print("all posts: " + str(posts))
+    context = get_object_or_404(posts, pk=pid)
+    if context.login_require == True and not request.user.is_authenticated:
+        messages.add_message(request, messages.INFO, 'You are not logged in<br>Please login')
+        # return redirect('accounts:login', 'blog:index')
+        print(request.path)
+        return redirect("/accounts/login/?next=" + request.path)
+    comments = Comment.objects.filter(post=context.id, approved = True)
+    context.counted_views = context.counted_views + 1
+    context.save()
+    # Finding the post before and after
+    nextPost = posts.filter(pk__gt=pid).first()
+    prevPost = posts.filter(pk__lt=pid).last()
     context = {'context': context, 'prevPost': prevPost, 'nextPost': nextPost, 'comments': comments, 'form': form}
     return render(request, 'blog/blog-single.html', context)
 

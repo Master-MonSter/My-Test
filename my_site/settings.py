@@ -180,3 +180,16 @@ MULTI_CAPTCHA_ADMIN = {
 LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = ""
 LOGOUT_REDIRECT_URL = "accounts:login"
+
+# ******************************** reset password with email ********************************
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"    # With console
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"         # With email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_POST = 587
+EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.environ.get('elahifar.s94@gmail.com')
+# EMAIL_HOST_PASSWORD = os.environ.get('soheil09385818676pro')
+EMAIL_HOST_USER =''
+EMAIL_HOST_PASSWORD =''
+# ******************************** reset password with email ********************************
+

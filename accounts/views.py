@@ -6,8 +6,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+# ******************************** Change password ********************************
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+# ******************************** Change password ********************************
 
 # Create your views here.
 def login_view(request):
@@ -84,3 +86,4 @@ def change_password_view(request):
     return render(request, 'accounts/change_password.html', {
         'form': form
     })
+

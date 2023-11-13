@@ -13,4 +13,8 @@ urlpatterns = [
 
     # Register
     path('signup/', views.register_view, name='signup'),
+    
+    # Password change
+    path('change_password/', views.change_password_view, name='change_password'),
 ]
+    

@@ -6,6 +6,9 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
 # Create your views here.
 def login_view(request):
     if not request.user.is_authenticated:
@@ -17,7 +20,6 @@ def login_view(request):
             if author is not None:
                 request.POST._mutable = True
                 request.POST['username'] = author
-            print(request.POST)
             form = AuthenticationForm(request=request, data=request.POST)
             # ********************************************************* Checking that login is done with email or username and handle it *********************************************************
             if form.is_valid():
@@ -59,3 +61,26 @@ def register_view(request):
         return render(request, 'accounts/signup.html')
     else:
         return redirect('/')
+
+# **************************************** Some rolls for change password ****************************************
+# Your password can’t be too similar to your other personal information.
+# Your password must contain at least 8 characters.
+# Your password can’t be a commonly used password.
+# Your password can’t be entirely numeric.
+# **************************************** Some rolls for change password ****************************************
+@login_required   
+def change_password_view(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('/')
+        else:
+            messages.error(request, 'Please correct the error below.<br><br><ul style="text-align:left;"><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul>')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })

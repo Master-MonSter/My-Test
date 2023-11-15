@@ -189,7 +189,7 @@ EMAIL_POST = 587
 EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = os.environ.get('elahifar.s94@gmail.com')
 # EMAIL_HOST_PASSWORD = os.environ.get('soheil09385818676pro')
-EMAIL_HOST_USER =''
-EMAIL_HOST_PASSWORD =''
+EMAIL_HOST_USER ='Your email address'
+EMAIL_HOST_PASSWORD ='Your email --> app password'
 # ******************************** reset password with email ********************************
 

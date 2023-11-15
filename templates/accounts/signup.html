@@ -12,24 +12,34 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    <style>
+        .home {
+            color: #fff;
+        }
+        .home:hover {
+            color: aqua;
+        }
+		h1 {
+			font-size: clamp(3rem, 15vmin, 8rem);
+			font-family: sans-serif;
+			color: hsl(0 0% 98%);
+		}
+	</style>
 	</head>
-	<body class="img" style="background-image: url({% static 'img/bg.jpg' %}); height: 900px;">
+	<body class="img" style="background-image: url({% static 'img/bg.jpg' %});">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Sign Up</h2>
-				</div>
-			</div>
+				<h1 class="text-center" style="text-shadow: 1px 1px black;">Sign Up</h1>
+			</div><br/><br/>
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
-                        <h3 class="mb-4 text-center">Do you want an account?</h3>
+                        <h3 class="text-center" style="font-weight: bold; color: aquamarine; text-shadow: 2px 2px 10px black;">Do you want an account?</h3><br/>
                         <form action="{% url 'accounts:signup' %}" class="signin-form" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <input type="text" name="username" class="form-control" placeholder="Username" required>
+                                <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
                             </div>
                             <div class="form-group">
                                 <input type="email" name="email" class="form-control" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email" required>
@@ -45,23 +55,14 @@
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
                             </div>
-                            <div class="form-group d-md-flex">
-                                <div class="w-50">
-                                    <label class="checkbox-wrap checkbox-primary">Remember Me
-                                                <input type="checkbox" checked>
-                                                <span class="checkmark"></span>
-                                                </label>
-                                            </div>
-                                            <div class="w-50 text-md-right">
-                                                <a href="#" style="color: #fff">Forgot Password</a>
-                                            </div>
+                            <div class="w-100 text-center">
+                                <a class="home" href="/">Home page</a>
                             </div>
                         </form>
-                        <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
-                        <div class="social d-flex text-center">
+                        {% comment %} <div class="social d-flex text-center">
                             <a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
                             <a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
-                        </div>
+                        </div> {% endcomment %}
 		            </div>
 				</div>
 			</div>
@@ -118,7 +119,7 @@
     <!--  validation password  -->
     <script>
         var password = document.getElementById("password-field")
-            , confirm_password = document.getElementById("confirm_password");
+        , confirm_password = document.getElementById("confirm_password");
 
         function validatePassword(){
         if(password.value != confirm_password.value) {
@@ -132,5 +133,9 @@
         confirm_password.onkeyup = validatePassword;
     </script>
     <!--  validation password  -->
+
+    <script>
+        $(window).scrollTop(80);
+    </script>
 </html>
 

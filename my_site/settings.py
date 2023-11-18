@@ -26,18 +26,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5pifbi0lq+-*gbz31v&f4xh0%gyw&qxjq_80nf1#8-b27t+$q#'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -61,8 +49,6 @@ INSTALLED_APPS = [
     'accounts',
 ]
 
-# Sites framework configuration
-SITE_ID = 2 # (2) --> is my site domain's id that saved on db/site
 
 # Robots configuration
 ROBOTS_USE_HOST = True  # (True) --> is my robot should be show HOST name
@@ -98,17 +84,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'my_site.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -148,13 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "statics",
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -169,8 +139,6 @@ INTERNAL_IPS = [
 # Taggit module
 TAGGIT_CASE_INSENSITIVE = False
 
-# Summernote (how to allow iframe)
-X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Multi captcha admin configuration (3type: simple-captcha, recaptcha, recaptcha2)
 MULTI_CAPTCHA_ADMIN = {
@@ -187,9 +155,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"         # With ema
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = 587
 EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = os.environ.get('elahifar.s94@gmail.com')
-# EMAIL_HOST_PASSWORD = os.environ.get('soheil09385818676pro')
 EMAIL_HOST_USER ='l.o0of.war@gmail.com'
-EMAIL_HOST_PASSWORD ='gwww mlzt rhyt ybze'
+EMAIL_HOST_PASSWORD ='gwww mlzt rhyt ybze'
 # ******************************** reset password with email ********************************
 

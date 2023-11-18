@@ -8,3 +8,4 @@ django-taggit
 django-summernote
 django-simple-captcha
 django-multi-captcha-admin
+django-debug-toolbar

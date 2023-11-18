@@ -42,8 +42,8 @@ def login_view(request):
             # ******************************** Print just form.error_messages[invalid_login] element ********************************
             if form.errors:
                 for field in form.errors:
+                    print(form.errors)
                     for error in form.errors[field]:
-                        print(error)
                         msg = msg + f"<p>{error}</p>"
             messages.add_message(request, messages.ERROR, msg)
             # ******************************** Print just form.error_messages[invalid_login] element ********************************
@@ -112,7 +112,6 @@ def change_password_view(request):
             if form.errors:
                 for field in form.errors:
                     for error in form.errors[field]:
-                        print(error)
                         msg = msg + f"<p>{error}</p>"
             messages.error(request, msg)
     else:

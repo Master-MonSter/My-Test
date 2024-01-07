@@ -159,3 +159,7 @@ EMAIL_HOST_USER ='l.o0of.war@gmail.com'
 EMAIL_HOST_PASSWORD ='gwww mlzt rhyt ybze'
 # ******************************** reset password with email ********************************
 
+
+# ********************************** Active MAINTENANCE_MODE if (MAINTENANCE_MODE = True) **********************************
+MAINTENANCE_MODE = True
+# ********************************** Active MAINTENANCE_MODE if (MAINTENANCE_MODE = True) **********************************

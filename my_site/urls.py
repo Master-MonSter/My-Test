@@ -22,6 +22,11 @@ from django.contrib.sitemaps.views import sitemap
 from website.sitemaps import StaticViewSitemap
 from blog.sitemaps import BlogSitemap
 
+from django.urls import re_path
+from django.conf import settings
+from django.views.generic.base import TemplateView
+
+
 sitemaps = {
     "static": StaticViewSitemap,
     "blog": BlogSitemap,
@@ -53,3 +58,8 @@ urlpatterns = [
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# ********************************** Active MAINTENANCE_MODE if (MAINTENANCE_MODE = True) **********************************
+if settings.MAINTENANCE_MODE:
+   urlpatterns.insert(0, re_path(r'^', TemplateView.as_view(template_name='website/coming_soon/comingsoon-countdown-bubble.html'), name='coming_soon_index'))
+# ********************************** Active MAINTENANCE_MODE if (MAINTENANCE_MODE = True) **********************************

@@ -20,6 +20,9 @@ from django.utils.safestring import mark_safe
 def index_view(request):
     return render(request, 'website/index.html')
 
+def comingsoon_view(request):
+    return render(request, 'website/coming_soon/comingsoon-countdown-bubble.html')
+
 def about_view(request):
     return render(request, 'website/about.html')
 
